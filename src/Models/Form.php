@@ -2,7 +2,7 @@
 
 namespace Laravel\ActiveForm\Models;
 
-abstract class Form implements FormContract
+abstract class Form implements FormInterface
 {
     public function rules(): array
     {

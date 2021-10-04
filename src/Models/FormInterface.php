@@ -1,8 +1,10 @@
 <?php
 
+
 namespace Laravel\ActiveForm\Models;
 
-interface FormContract
+
+interface FormInterface
 {
     public function rules(): array;
     public function attributes(): array;

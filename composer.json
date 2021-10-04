@@ -1,5 +1,6 @@
 {
   "name": "kaswell/laravel-active-form",
+  "description": "Active Form Builders for the Laravel Framework",
   "license": "MIT",
   "authors": [
     {
@@ -12,15 +13,23 @@
   "autoload": {
     "psr-4": {
       "Laravel\\ActiveForm\\": "src/"
-    }
+    },
+    "files": [
+      "src/helpers.php"
+    ]
   },
   "require": {
     "php": ">7.4",
     "illuminate/support": "*",
-    "illuminate/http": "*"
+    "illuminate/http": "*",
+    "illuminate/routing": "*",
+    "illuminate/session": "*",
+    "illuminate/view": "*",
+    "laravelcollective/html": "*"
   },
   "require-dev": {
-    "roave/backward-compatibility-check": "*"
+    "roave/backward-compatibility-check": "*",
+    "phpunit/phpunit": "*"
   },
   "config": {
     "sort-packages": true
@@ -29,7 +38,12 @@
     "laravel": {
       "providers": [
         "Laravel\\ActiveForm\\ActiveFormServiceProvider"
-      ]
+      ],
+      "aliases": {
+        "ActiveForm": "Laravel\\ActiveForm\\FormBuilder"
+      }
     }
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }

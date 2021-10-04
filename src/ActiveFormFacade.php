@@ -1,16 +1,16 @@
 <?php
 
-namespace Laravel\ActiveForm\Facades;
+namespace Laravel\ActiveForm;
 
 use Illuminate\Support\Facades\Facade;
 
-class ActiveForm extends Facade
+class ActiveFormFacade extends Facade
 {
     /**
      * @return string
      */
     protected static function getFacadeAccessor(): string
     {
-        return \Laravel\ActiveForm\ActiveForm::class;
+        return 'Form';
     }
 }

@@ -25,44 +25,17 @@ class ActiveFormServiceProvider  extends ServiceProvider
      * Register any application services.
      * @return void
      */
-    public function register(): void
+    public function register()
     {
         $this->publishes([
-            __DIR__.'/views' => base_path('public/js'),
+            __DIR__.'/../js' => base_path('public/js'),
         ]);
 
         $this->mergeConfigFrom(
             __DIR__ . '/../config/active-form.php', 'active-form'
         );
 
-        $this->app->bind('ActiveForm', function (){
-            return new \Laravel\ActiveForm\ActiveForm;
-        });
-
-
-
-        Route::post(config('active-form.route'), function (Request $request) {
-            $class = $request->class;
-            $class = str_replace('/', '\\', $class);
-
-            $request_class = new $class();
-            $request_class->setMethod(Request::METHOD_OPTIONS);
-
-            $validator = Validator::make($request->all(), $request_class->rules(), $request_class->messages());
-            $validator->setAttributeNames($request_class->attributes());
-
-            if ($request->ajax()) {
-                if ($validator->fails()) {
-                    return response()->json([
-                        'success' => false,
-                        'errors' => $validator->getMessageBag()->toArray()
-                    ]);
-                }
-                return response()->json([
-                    'success' => true,
-                ]);
-            }
-        });
+        $this->app->alias('ActiveForm', ActiveFormBuilder::class);
 
         Route::post(config('active-form.route'), function(Request $request){
             $class = $request->class;
@@ -84,6 +57,20 @@ class ActiveFormServiceProvider  extends ServiceProvider
                     ));
                 }
             }
+        });
+    }
+
+    /**
+     * Register the form builder instance.
+     *
+     * @return void
+     */
+    protected function registerFormBuilder()
+    {
+        $this->app->singleton('form', function ($app) {
+            $form = new ActiveFormBuilder($app['html'], $app['url'], $app['view'], $app['session.store']->token(), $app['request']);
+
+            return $form->setSessionStore($app['session.store']);
         });
     }
 }
