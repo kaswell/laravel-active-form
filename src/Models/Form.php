@@ -2,7 +2,7 @@
 
 namespace Laravel\ActiveForm\Models;
 
-abstract class Form
+abstract class Form implements FormContract
 {
     public function rules(): array
     {
@@ -11,7 +11,7 @@ abstract class Form
         ];
     }
 
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'temp' => 'Box Folder Id',
@@ -19,7 +19,7 @@ abstract class Form
     }
 
 
-    public function messages()
+    public function messages(): array
     {
         return [];
     }
