@@ -1,0 +1,23 @@
+{
+    "name": "kaswell/laravel-active-form",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aliaksandr Kasatkin",
+            "email": "a.kasatkin@nonium.by",
+            "homepage": "https://nonium.by",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Laravel\\ActiveForm\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">7.4"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
